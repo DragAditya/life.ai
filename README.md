@@ -1,3 +1,4 @@
+
 # Life.AI - Your Memories, Your Life, Fully Yours
 
 <div align="center">
@@ -109,20 +110,45 @@ Life.AI is a smart, **open-source personal memory system** that works like a sup
 - Gemini API key (free tier available)
 
 ### 1. Clone & Install
-```bash
+bash
 git clone https://github.com/yourusername/life-ai.git
 cd life-ai
 npm install
-```
+
 
 ### 2. Set Up Environment Variables
 Copy `.env.example` to `.env` and fill in your keys:
 
-```bash
+bash
 cp .env.example .env
-```
 
-```env
+
+env
+# App Configuration
+VITE_APP_URL=http://localhost:3000
+VITE_APP_NAME=Life.AI
+
+# Supabase Configuration
+VITE_SUPABASE_URL=YOUR_SUPABASE_PROJECT_URL
+VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+
+# Google Gemini AI Configuration
+VITE_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+
+# Google Drive Backup Configuration (Optional)
+VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+VITE_GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
+
+
+### 3. Run Development Server
+bash
+npm run dev
+
+
+Open [http://localhost:3000](http://localhost:3000). You will be redirected to the login page to authenticate with Google.
+
+---
+
 # Supabase Configuration
 VITE_SUPABASE_URL=your_supabase_project_url_here
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_public_key_here
@@ -137,16 +163,6 @@ VITE_GOOGLE_DRIVE_CLIENT_SECRET=your_google_oauth_client_secret
 # App Configuration
 VITE_APP_URL=http://localhost:3000
 VITE_APP_NAME=Life.AI
-```
-
-### 3. Run Development Server
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) and start creating memories!
-
----
 
 ## 🔑 Getting Your API Keys
 
@@ -417,20 +433,22 @@ Result: All Goa-related memories + graph connections removed
 ## 🛠️ Development
 
 ### Available Scripts
-```bash
+bash
 npm run dev          # Start development server
 npm run build        # Build for production  
 npm run preview      # Preview production build
 npm run lint         # Run ESLint
-```
+
 
 ### Key Development Tips
 
 1. **State Management**: Each Zustand store handles a specific domain
-2. **Error Handling**: All API calls return `{ success, data, error }` format
-3. **Loading States**: Components show loading spinners during async operations
-4. **Offline Support**: Basic offline functionality with local storage
-5. **Real-time Updates**: Supabase subscriptions keep data in sync
+2. **Authentication Flow**: The application now includes a dedicated `LoginPage` for user authentication via Google, managed by `useAuthStore`.
+3. **Error Handling**: All API calls return `{ success, data, error }` format
+4. **Loading States**: Components show loading spinners during async operations (e.g., during authentication).
+5. **UI Notifications**: Integrated `ToastProvider` for consistent user notifications across the application.
+6. **Offline Support**: Basic offline functionality with local storage
+7. **Real-time Updates**: Supabase subscriptions keep data in sync
 
 ### Adding New Features
 
@@ -476,9 +494,13 @@ git clone https://github.com/yourusername/life-ai.git
 cd life-ai
 npm install
 cp .env.example .env
-# Add your API keys to .env
+## Add your API keys to .env
+
+After setting up your environment variables in the `.env` file with your API keys (as described in the Quick Start), run the development server:
+
+bash
 npm run dev
-```
+
 
 ---
 
